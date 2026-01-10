@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/css/styles.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <title>What's in your fridge - Easy recipes</title>
+</head>
+<body>
+   <header>
+      <h1>What's in your fridge</h1>
+      <div class="controls">
+         <button id="show-fav-btn" class="btn secondary"><i class="fas fa-heart"></i> Favorites</button>
+         <button id="random-btn" class="btn secondary"><i class="fas fa-random"></i> Random recipe</button>
+         <button id="shopping-list-btn" class="btn secondary"><i class="fas fa-cart-plus"></i> Shopping List</button>
+      </div>
+   </header>
+
+   <main>
+      <div class="search-container">
+         <label for="search-input">Search by ingredients (separate by comma)</label>
+            <input type="text" id="search-input" placeholder="Enter an ingredient (e.g. chicken, egg, potato)...">
+         <button id="search-btn" class="btn primary">Search</button>
+      </div>
+      <div class="search-container">
+         <label for="search-name-input"> Search by Name</label>
+            <input type="text" id="search-name-input" placeholder="Enter meal name...">
+         <button id="search-name-btn" class="btn primary">Search</button>
+      </div>
+   </main>
+      <p id="mealCount">Found: 0</p>
+      <div id="recipe-grid" class="grid-container">
+         <p class="placeholder-text">Write an ingredient or select a random recipe!</p>
+      </div>
+
+   <div id="modal-container" class="modal-overlay hidden">
+   </div>
+
+   <script type="module" src="./js/app.js"></script>
+</body>
+</html>

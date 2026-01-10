@@ -1,0 +1,125 @@
+/* =========================================
+   1. Global & Variables (Shadow DOM Scope)
+   ========================================= */
+:host {
+    /* Colors (Fallbacks) */
+    --primary-color: #ff6b6b;
+    --primary-hover: #ff4757;
+    --card-bg: #353b48;
+    --text-color: #dfe6e9;
+    --bg-overlay: rgba(255, 255, 255, 0.05);
+    
+    /* Settings */
+    --transition-speed: 0.2s;
+    
+    color: var(--text-color);
+    font-family: 'Segoe UI', sans-serif;
+    display: block;
+}
+
+/* =========================================
+   2. Layout & Grid
+   ========================================= */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 30px;
+}
+
+.placeholder-text {
+    margin: 0;
+    opacity: 0.85;
+}
+
+.search-criteria {
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   3. Recipe Cards
+   ========================================= */
+.recipe-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 10px;
+    width: 230px;
+}
+
+.recipe-card img {
+    flex: 0 0 auto;
+    width: 100%;
+    object-fit: cover;
+}
+
+.recipe-card .title {
+    justify-content: space-between;
+    align-items: start;
+    display: flex;
+    top: 0;
+    padding: 0 7px;
+}
+
+.recipe-card h3 {
+    margin: 5px 0 0 0;
+}
+
+.recipe-card .card-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    gap: 0;
+    flex-wrap: nowrap;
+}
+
+/* =========================================
+   4. Buttons & Controls (Shadow Scope)
+   ========================================= */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color var(--transition-speed) ease-out;
+}
+
+.btn.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn.primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-details {
+    display: flex;
+    font-size: 90%;
+}
+
+/* Favorite Button */
+.fav-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ccc;
+    transition: transform var(--transition-speed) ease-in-out, color var(--transition-speed);
+}
+
+.fav-btn:hover {
+    transform: scale(1.1);
+}
+
+.fav-btn.active {
+    color: var(--primary-color);
+}
