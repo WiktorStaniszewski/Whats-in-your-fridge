@@ -20,10 +20,18 @@ header {
     margin-bottom: 40px;
 }
 
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: end;
+}
+
 main {
     display: flex;
     justify-content: center;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     gap: 20px;
 }
@@ -34,7 +42,7 @@ main {
     gap: 10px;
     flex-direction: column;
     width: fit-content;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 input {
