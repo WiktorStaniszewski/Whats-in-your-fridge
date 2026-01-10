@@ -1,6 +1,6 @@
 
 export function initShadowRecipeGrid(hostEl, {
-  cssUrl = "/css/shadowGrid.css",
+  cssUrl = "./css/shadowGrid.css",
   placeholderHtml = '<p class="placeholder-text">Write an ingredient or select a random recipe!</p>',
 } = {}) {
   if (!hostEl) throw new Error("initShadowRecipeGrid: hostEl is required");
