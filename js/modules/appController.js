@@ -4,27 +4,31 @@ import { createRecipeGridView } from './recipeGrid/recipeGridView.js';
 import { handleGridClick } from './recipeGrid/recipeGridHandlers.js';
 import { loadFavorites } from '../components/Favorites.js';
 import { renderModal } from '../components/Modal.js';
-import { renderShoppingList } from '../components/ShoppingListView.js';
+import { renderShoppingListShadow } from '../components/ShoppingListView.js';
+
+const byId = (id) => document.getElementById(id);
 
 function getEl() {
-  const gridHost = document.getElementById('recipe-grid');
+  const gridHost = byId('recipe-grid');
+  if (!gridHost) throw new Error('initApp: #recipe-grid not found');
+
   const { gridContainer } = initShadowRecipeGrid(gridHost);
 
+  const modalContainer = byId('modal-container');
+  if (!modalContainer) throw new Error('initApp: #modal-container not found');
+
   return {
-    searchInput: document.getElementById('search-input'),
-    searchBtn: document.getElementById('search-btn'),
+    searchInput: byId('search-input'),
+    searchNameInput: byId('search-name-input'),
 
-    searchNameInput: document.getElementById('search-name-input'),
-    searchNameBtn: document.getElementById('search-name-btn'),
+    searchBtn: byId('search-btn'),
+    searchNameBtn: byId('search-name-btn'),
 
-    shoppingListBtn: document.getElementById('shopping-list-btn'),
-    modalContainer: document.getElementById('modal-container'), 
-    gridContainer: document.getElementById('recipe-grid'),
+    randomBtn: byId('random-btn'),
+    favBtn: byId('show-fav-btn'),
+    shoppingListBtn: byId('shopping-list-btn'),
 
-    randomBtn: document.getElementById('random-btn'),
-    favBtn: document.getElementById('show-fav-btn'),
-    shoppingListBtn: document.getElementById('shopping-list-btn'),
-
+    modalContainer,
     gridContainer,
   };
 }
@@ -32,14 +36,6 @@ function getEl() {
 export function initApp() {
   const el = getEl();
   const gridView = createRecipeGridView(el.gridContainer);
-
-  if (el.shoppingListBtn) {
-      el.shoppingListBtn.addEventListener('click', () => {
-          el.modalContainer.innerHTML = '';
-          renderShoppingList(el.modalContainer);
-          el.modalContainer.classList.remove('hidden');
-      });
-  }
 
   const view = (() => {
     let current = 'recipes';
@@ -53,25 +49,24 @@ export function initApp() {
   })();
 
   const runSearch = async ({ mode, query }) => {
-    const q = query.trim();
+    const q = (query ?? '').trim();
     if (!q) return;
 
     view.set('recipes');
     gridView.setMessage('<p>Searching...</p>');
 
     try {
-        let recipes;
+      let recipes;
 
-        if (mode === 'ingredient') {
-        // multi-ingredient tylko po przecinkach, żeby nie psuć składników typu "soy sauce"
+      if (mode === 'ingredient') {
         const parts = q.split(',').map(s => s.trim()).filter(Boolean);
-
         recipes = parts.length > 1
-            ? await fetchByIngredientsAll(parts)
-            : await fetchByIngredient(q);
-        } else {
+          ? await fetchByIngredientsAll(parts)
+          : await fetchByIngredient(q);
+      } else {
         recipes = await fetchByName(q);
-        }
+      }
+
       gridView.renderRecipes(recipes);
     } catch {
       gridView.setMessage('<p>Search failed. Try again.</p>');
@@ -79,10 +74,12 @@ export function initApp() {
   };
 
   const bindSearch = ({ input, button, mode }) => {
+    if (!input || !button) return;
+
     const handler = () => runSearch({ mode, query: input.value });
 
     button.addEventListener('click', handler);
-    input.addEventListener('keypress', (e) => {
+    input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') handler();
     });
   };
@@ -90,16 +87,20 @@ export function initApp() {
   bindSearch({ input: el.searchInput, button: el.searchBtn, mode: 'ingredient' });
   bindSearch({ input: el.searchNameInput, button: el.searchNameBtn, mode: 'name' });
 
-  el.randomBtn.addEventListener('click', async () => {
+  el.shoppingListBtn?.addEventListener('click', () => {
+    renderShoppingListShadow(el.modalContainer);
+  });
+
+  el.randomBtn?.addEventListener('click', async () => {
     try {
       const recipe = await fetchRandom();
       if (recipe) renderModal(recipe);
-    } catch {
-      console.error('Failed to fetch random recipe. Balls');
+    } catch (err) {
+      console.error('Failed to fetch random recipe.', err);
     }
   });
 
-  el.favBtn.addEventListener('click', () => {
+  el.favBtn?.addEventListener('click', () => {
     view.set('favorites');
     loadFavorites(el.gridContainer);
   });

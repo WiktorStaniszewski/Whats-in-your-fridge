@@ -15,7 +15,13 @@
     display: flex;
     flex-direction: column;
 }
-
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+}
+.modal-overlay.hidden { display: none; }
 .modal-links {
     align-self: center;
     margin-bottom: 10px;
@@ -100,9 +106,6 @@
     color: var(--primary-color);
 }
 
-/* =========================================
-   3. Floating Action Button
-   ========================================= */
 .btn-side-download {
     position: sticky;
     bottom: 9.2%;
@@ -116,88 +119,18 @@
     font-weight: bold;
     transition: 0.2s;
 }
-
-/* =========================================
-   4. Shopping List Components
-   ========================================= */
-.shopping-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.btn.secondary {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
 }
-
-.shopping-items {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* List Items */
-.shopping-items li {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 12px 15px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    margin-bottom: 8px;
-    transition: all 0.2s ease;
-    cursor: pointer; 
-}
-
-.shopping-items li:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateX(5px);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Checkboxes */
-.shopping-items input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 22px;
-    height: 22px;
-    border: 2px solid var(--primary-color);
-    border-radius: 5px;
-    background: transparent;
-    cursor: pointer;
-    position: relative;
-    flex-shrink: 0;
-    transition: 0.2s;
-}
-
-.shopping-items input[type="checkbox"]:checked {
-    background-color: var(--primary-color);
-}
-
-.shopping-items input[type="checkbox"]:checked::after {
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-
-/* Checked State */
-.shopping-items li.checked {
-    opacity: 0.5;
-    background: transparent;
-    border-color: transparent;
-}
-
-.shopping-items li.checked .item-text {
-    text-decoration: line-through;
-    color: #888;
-}
-
-.shopping-items li.checked input[type="checkbox"] {
-    background-color: #555; 
-    border-color: #555;
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
 }
 
 /* Typography */
@@ -219,26 +152,3 @@
     opacity: 0.8;
 }
 
-/* Shopping List Footer */
-.empty-msg {
-    text-align: center;
-    padding: 30px 0;
-    color: #888;
-    font-style: italic;
-}
-
-#clear-shopping {
-    width: 100%;
-    margin-top: 15px;
-    padding: 12px;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
-    background: transparent;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
-}
-
-#clear-shopping:hover {
-    background: var(--primary-color);
-    color: white;
-}

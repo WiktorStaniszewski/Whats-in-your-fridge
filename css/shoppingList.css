@@ -1,0 +1,190 @@
+/* --- Shopping List Container --- */
+.shopping-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.shopping-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- List Items (Rows) --- */
+.shopping-items li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer; 
+}
+
+.shopping-items li:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.shopping-items input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: 0.2s;
+}
+
+.shopping-items input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+}
+
+.shopping-items input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.shopping-items li.checked {
+    opacity: 0.5;
+    background: transparent;
+    border-color: transparent;
+}
+
+.shopping-items li.checked .item-text {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.shopping-items li.checked input[type="checkbox"] {
+    background-color: #555; 
+    border-color: #555;
+}
+:root {
+    --primary-color: #ff6b6b;
+    --bg-color: #2d3436;
+    --card-bg: #353b48;
+    --text-color: #dfe6e9;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: end;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+    width: fit-content;
+    margin-bottom: 15px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    width: 300px;
+    font-size: 1rem;
+}
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn.primary { background-color: var(--primary-color); color: white; }
+.btn.secondary { background-color: transparent; border: 2px solid var(--primary-color); color: var(--primary-color); }
+.btn:hover { opacity: 0.8; }
+.btn-side-download {
+    position: sticky;
+    bottom: 9.2%;
+    margin-left: 80%;
+    width: 60px;
+    height: 50px;   
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+    @media (max-width: 373px) {
+        & { margin-left: 75%; }
+    }
+}
+
+.btn-placeholder {
+    width: 40px; 
+    visibility: hidden;
+}
+.fa-heart{
+  padding-left:3.3px;
+  padding-right:3.4px;
+}
+
+.fav-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #ccc; }
+.head > .fav-btn:hover { transform: scale(1.2); transition: ease-in-out 0.3s; }
+.fav-btn.active { color: var(--primary-color); }
+
+#clear-shopping {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+#clear-shopping:hover {
+    background: var(--primary-color);
+    color: white;
+}

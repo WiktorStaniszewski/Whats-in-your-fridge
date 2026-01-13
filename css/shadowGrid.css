@@ -1,25 +1,15 @@
-/* =========================================
-   1. Global & Variables (Shadow DOM Scope)
-   ========================================= */
 :host {
-    /* Colors (Fallbacks) */
     --primary-color: #ff6b6b;
     --primary-hover: #ff4757;
     --card-bg: #353b48;
     --text-color: #dfe6e9;
     --bg-overlay: rgba(255, 255, 255, 0.05);
-    
-    /* Settings */
     --transition-speed: 0.2s;
-    
     color: var(--text-color);
     font-family: 'Segoe UI', sans-serif;
     display: block;
 }
 
-/* =========================================
-   2. Layout & Grid
-   ========================================= */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -41,9 +31,6 @@
     padding: 0;
 }
 
-/* =========================================
-   3. Recipe Cards
-   ========================================= */
 .recipe-card {
     background-color: var(--card-bg);
     border-radius: 10px;
@@ -85,9 +72,6 @@
     flex-wrap: nowrap;
 }
 
-/* =========================================
-   4. Buttons & Controls (Shadow Scope)
-   ========================================= */
 .btn {
     padding: 10px 20px;
     border: none;
@@ -111,7 +95,6 @@
     font-size: 90%;
 }
 
-/* Favorite Button */
 .fav-btn {
     background: none;
     border: none;
